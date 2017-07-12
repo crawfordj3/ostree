@@ -61,12 +61,13 @@ read_config()
 
 populate_menu()
 {
+    boot_dir="boot/"
     boot_prefix="${OSTREE_BOOT_PARTITION}"
     for config in $(ls ${entries_path}); do
         read_config ${config}
         menu="${menu}menuentry '${title}' {\n"
-        menu="${menu}\t linux ${boot_prefix}${linux} ${options}\n"
-        menu="${menu}\t initrd ${boot_prefix}${initrd}\n"
+        menu="${menu}\t linux ${boot_dir}/${boot_prefix}${linux} ${options}\n"
+        menu="${menu}\t initrd ${boot_dir}/${boot_prefix}${initrd}\n"
         menu="${menu}}\n\n"
     done
     # The printf command seems to be more reliable across shells for special character (\n, \t) evaluation
